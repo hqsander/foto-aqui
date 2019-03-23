@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
 
+import ItemLista from '../../componentes/ItemLista';
+
 class TelaCompartilhaLocal extends Component {
   state = {
     descLocal: '',
@@ -27,8 +29,8 @@ class TelaCompartilhaLocal extends Component {
 
   render() {
 
-    const locais = this.state.locais.map( local => {
-      return (<Text>{local}</Text>);
+    const locais = this.state.locais.map( (local, i) => {
+      return (<ItemLista key={i} nomeLocal={local}/>);
     });
 
     return (
