@@ -1,6 +1,9 @@
 # EXPO
 .expo/
 
+# VSCODE
+.vscode/
+
 # OSX
 .DS_Store
 
