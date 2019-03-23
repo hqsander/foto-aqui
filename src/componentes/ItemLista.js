@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
 class ItemLista extends Component {
   render() {
     return(
-      <View style = {styles.container}>
-        <Text>{this.props.nomeLocal}</Text>
-      </View>
+      <TouchableOpacity onPress={this.props.onPressionarItem}>
+        <View style = {styles.container}>
+          <Text>{this.props.nomeLocal}</Text>
+        </View>
+      </TouchableOpacity>
     );
   }
 }

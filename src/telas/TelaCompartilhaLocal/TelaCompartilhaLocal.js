@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 
 import InputLocal from '../../componentes/InputLocal';
 import ListaLocal from '../../componentes/ListaLocal';
@@ -17,16 +17,27 @@ class TelaCompartilhaLocal extends Component {
     });
   }
 
+  deletarLocalHandler = key => {
+    this.setState(prevState => {
+      return {
+        locais: prevState.locais.filter(local => {
+          return prevState.locais.indexOf(local) !== key;
+        })
+      };
+    });
+  }
+
   render() {
     return (
       <View>
         <InputLocal onIncluirLocal={this.onIncluirLocal} />
-        <ListaLocal locais={this.state.locais} />
+        <ListaLocal 
+          locais={this.state.locais}
+          onDeletarItem={this.deletarLocalHandler}
+        />
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({});
 
 export default TelaCompartilhaLocal;
