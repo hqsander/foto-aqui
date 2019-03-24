@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet, View, Text, TouchableOpacity, Image
+} from 'react-native';
 
 class ItemLista extends Component {
   render() {
-    return(
+    return (
       <TouchableOpacity onPress={this.props.onPressionarItem}>
-        <View style = {styles.container}>
+        <View style={styles.container}>
+          <Image resizeMode="contain" source={this.props.imgLocal} style={styles.imgLocal} />
           <Text>{this.props.nomeLocal}</Text>
         </View>
       </TouchableOpacity>
@@ -15,14 +18,19 @@ class ItemLista extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    width: "90%",
-    justifyContent: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '90%',
     marginLeft: 'auto',
     marginRight: 'auto',
     marginTop: 10,
-    height: 30,
     backgroundColor: '#eee',
     paddingLeft: 5
+  },
+  imgLocal: {
+    marginRight: 8,
+    height: 60,
+    width: 60
   }
 });
 

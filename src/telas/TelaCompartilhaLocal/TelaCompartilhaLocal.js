@@ -3,6 +3,7 @@ import { View } from 'react-native';
 
 import InputLocal from '../../componentes/InputLocal';
 import ListaLocal from '../../componentes/ListaLocal';
+import imgLocal from '../../../assets/liberdade.jpg';
 
 class TelaCompartilhaLocal extends Component {
   state = {
@@ -11,7 +12,11 @@ class TelaCompartilhaLocal extends Component {
 
   onIncluirLocal = (descLocal) => {
     this.setState(prevState => ({
-      locais: prevState.locais.concat({ key: Math.random().toString(), value: descLocal })
+      locais: prevState.locais.concat({
+        key: Math.random().toString(),
+        descricao: descLocal,
+        imagem: imgLocal
+      })
     }));
   }
 

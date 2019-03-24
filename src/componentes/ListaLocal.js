@@ -11,7 +11,8 @@ class ListaLocal extends Component {
         data={this.props.locais}
         renderItem={local => (
           <ItemLista
-            nomeLocal={local.item.value}
+            nomeLocal={local.item.descricao}
+            imgLocal={local.item.imagem}
             onPressionarItem={() => this.props.onDeletarItem(local.item.key)}
           />
         )}
