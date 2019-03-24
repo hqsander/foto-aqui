@@ -1,38 +1,40 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TextInput, Button } from 'react-native';
+import {
+  StyleSheet, View, TextInput, Button
+} from 'react-native';
 
 class InputLocal extends Component {
   state = {
     descLocal: '',
   }
 
-  descLocalHandler = input => {
+  descLocalHandler = (input) => {
     this.setState({
       descLocal: input
     });
   }
 
   addLocalHandler = () => {
-    if (this.state.descLocal.trim() === "") {
+    if (this.state.descLocal.trim() === '') {
       return;
     }
 
-    this.props.onIncluirLocal(this.state.descLocal)
+    this.props.onIncluirLocal(this.state.descLocal);
   }
 
   render() {
-    return(
-      <View style = {styles.inputContainer}>
-        <View style = {styles.localContainer}>
+    return (
+      <View style={styles.inputContainer}>
+        <View style={styles.localContainer}>
           <TextInput
-            value = {this.state.descLocal}
-            onChangeText = {this.descLocalHandler}
+            value={this.state.descLocal}
+            onChangeText={this.descLocalHandler}
           />
         </View>
         <View>
           <Button
-            title = {'>>>'}
-            onPress = {this.addLocalHandler}
+            title={'>>>'}
+            onPress={this.addLocalHandler}
           />
         </View>
       </View>

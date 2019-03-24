@@ -9,29 +9,23 @@ class TelaCompartilhaLocal extends Component {
     locais: []
   }
 
-  onIncluirLocal = descLocal => {
-    this.setState( prevState => {
-      return {
-        locais: prevState.locais.concat(descLocal)
-      };
-    });
+  onIncluirLocal = (descLocal) => {
+    this.setState(prevState => ({
+      locais: prevState.locais.concat(descLocal)
+    }));
   }
 
-  deletarLocalHandler = key => {
-    this.setState(prevState => {
-      return {
-        locais: prevState.locais.filter(local => {
-          return prevState.locais.indexOf(local) !== key;
-        })
-      };
-    });
+  deletarLocalHandler = (key) => {
+    this.setState(prevState => ({
+      locais: prevState.locais.filter(local => prevState.locais.indexOf(local) !== key)
+    }));
   }
 
   render() {
     return (
       <View>
         <InputLocal onIncluirLocal={this.onIncluirLocal} />
-        <ListaLocal 
+        <ListaLocal
           locais={this.state.locais}
           onDeletarItem={this.deletarLocalHandler}
         />
