@@ -1,21 +1,21 @@
 /* eslint-disable react/no-array-index-key */
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { FlatList } from 'react-native';
 
 import ItemLista from './ItemLista';
 
 class ListaLocal extends Component {
   render() {
-    const locais = this.props.locais.map((local, i) => (
-      <ItemLista
-        key={i}
-        nomeLocal={local}
-        onPressionarItem={() => this.props.onDeletarItem(i)}
-      />
-    ));
-
     return (
-      <View>{locais}</View>
+      <FlatList
+        data={this.props.locais}
+        renderItem={local => (
+          <ItemLista
+            nomeLocal={local.item.value}
+            onPressionarItem={() => this.props.onDeletarItem(local.item.key)}
+          />
+        )}
+      />
     );
   }
 }

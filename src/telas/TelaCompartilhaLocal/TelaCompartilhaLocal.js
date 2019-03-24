@@ -11,13 +11,13 @@ class TelaCompartilhaLocal extends Component {
 
   onIncluirLocal = (descLocal) => {
     this.setState(prevState => ({
-      locais: prevState.locais.concat(descLocal)
+      locais: prevState.locais.concat({ key: Math.random().toString(), value: descLocal })
     }));
   }
 
   deletarLocalHandler = (key) => {
     this.setState(prevState => ({
-      locais: prevState.locais.filter(local => prevState.locais.indexOf(local) !== key)
+      locais: prevState.locais.filter(local => local.key !== key)
     }));
   }
 
