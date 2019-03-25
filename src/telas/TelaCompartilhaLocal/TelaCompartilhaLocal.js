@@ -3,14 +3,16 @@ import { View } from 'react-native';
 
 import InputLocal from '../../componentes/InputLocal';
 import ListaLocal from '../../componentes/ListaLocal';
+import DetalheLocal from '../../componentes/DetalheLocal';
 import imgLocal from '../../../assets/liberdade.jpg';
 
 class TelaCompartilhaLocal extends Component {
   state = {
-    locais: []
+    locais: [],
+    localSelecionado: null
   }
 
-  onIncluirLocal = (descLocal) => {
+  adicionarLocalHandler = (descLocal) => {
     this.setState(prevState => ({
       locais: prevState.locais.concat({
         key: Math.random().toString(),
@@ -20,19 +22,37 @@ class TelaCompartilhaLocal extends Component {
     }));
   }
 
-  deletarLocalHandler = (key) => {
+  excluirLocalHandler = () => {
     this.setState(prevState => ({
-      locais: prevState.locais.filter(local => local.key !== key)
+      locais: prevState.locais.filter(local => local.key !== prevState.localSelecionado.key),
+      localSelecionado: null
+    }));
+  }
+
+  fecharModalHandler = () => {
+    this.setState({
+      localSelecionado: null
+    });
+  }
+
+  selecionarLocalHandler = (key) => {
+    this.setState(prevState => ({
+      localSelecionado: prevState.locais.find(local => local.key === key)
     }));
   }
 
   render() {
     return (
       <View>
-        <InputLocal onIncluirLocal={this.onIncluirLocal} />
+        <DetalheLocal
+          localSelecionado={this.state.localSelecionado}
+          onExcluirLocal={this.excluirLocalHandler}
+          onFecharModal={this.fecharModalHandler}
+        />
+        <InputLocal onIncluirLocal={this.adicionarLocalHandler} />
         <ListaLocal
           locais={this.state.locais}
-          onDeletarItem={this.deletarLocalHandler}
+          onSelecionarItem={this.selecionarLocalHandler}
         />
       </View>
     );

@@ -13,7 +13,7 @@ class ListaLocal extends Component {
           <ItemLista
             nomeLocal={local.item.descricao}
             imgLocal={local.item.imagem}
-            onPressionarItem={() => this.props.onDeletarItem(local.item.key)}
+            onPressionarItem={() => this.props.onSelecionarItem(local.item.key)}
           />
         )}
       />
