@@ -5,6 +5,8 @@ import {
   DESSELECIONAR_LOCAL
 } from '../actions/actionTypes';
 
+import imgLocal from '../../../assets/liberdade.jpg';
+
 const initialState = {
   locais: [],
   localSelecionado: null
@@ -16,12 +18,9 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         locais: state.locais.concat({
-          key: Math.random(),
+          key: Math.random().toString(),
           descricao: action.descricao,
-          imagem: {
-            uri:
-              'https://c1.staticflickr.com/5/4096/4744241983_34023bf303_b.jpg'
-          }
+          imagem: imgLocal
         })
       };
     case EXCLUIR_LOCAL:

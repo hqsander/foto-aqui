@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import InputLocal from '../../componentes/InputLocal';
 import ListaLocal from '../../componentes/ListaLocal';
 import DetalheLocal from '../../componentes/DetalheLocal';
-import imgLocal from '../../../assets/liberdade.jpg';
+
 import {
   incluirLocal,
   excluirLocal,
@@ -14,51 +14,33 @@ import {
 } from '../../store/actions/index';
 
 class TelaCompartilhaLocal extends Component {
-  state = {
-    locais: [],
-    localSelecionado: null
-  }
-
-  adicionarLocalHandler = (descLocal) => {
-    this.setState(prevState => ({
-      locais: prevState.locais.concat({
-        key: Math.random().toString(),
-        descricao: descLocal,
-        imagem: imgLocal
-      })
-    }));
+  incluirLocalHandler = (descricao) => {
+    this.props.onIncluirLocal(descricao);
   }
 
   excluirLocalHandler = () => {
-    this.setState(prevState => ({
-      locais: prevState.locais.filter(local => local.key !== prevState.localSelecionado.key),
-      localSelecionado: null
-    }));
+    this.props.onExcluirLocal();
   }
 
   fecharModalHandler = () => {
-    this.setState({
-      localSelecionado: null
-    });
+    this.props.onDesselecionarLocal();
   }
 
   selecionarLocalHandler = (key) => {
-    this.setState(prevState => ({
-      localSelecionado: prevState.locais.find(local => local.key === key)
-    }));
+    this.props.onSelecionarLocal(key);
   }
 
   render() {
     return (
       <View>
         <DetalheLocal
-          localSelecionado={this.state.localSelecionado}
+          localSelecionado={this.props.localSelecionado}
           onExcluirLocal={this.excluirLocalHandler}
           onFecharModal={this.fecharModalHandler}
         />
-        <InputLocal onIncluirLocal={this.adicionarLocalHandler} />
+        <InputLocal onIncluirLocal={this.incluirLocalHandler} />
         <ListaLocal
-          locais={this.state.locais}
+          locais={this.props.locais}
           onSelecionarItem={this.selecionarLocalHandler}
         />
       </View>
@@ -68,7 +50,7 @@ class TelaCompartilhaLocal extends Component {
 
 const mapStateToProps = state => ({
   locais: state.locais.locais,
-  descricao: state.locais.descricao
+  localSelecionado: state.locais.localSelecionado
 });
 
 const mapDispatchToProps = dispatch => ({
