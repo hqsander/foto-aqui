@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import { connect } from 'react-redux';
 
 import InputLocal from '../../componentes/InputLocal';
 import ListaLocal from '../../componentes/ListaLocal';
 import DetalheLocal from '../../componentes/DetalheLocal';
 import imgLocal from '../../../assets/liberdade.jpg';
+import {
+  incluirLocal,
+  excluirLocal,
+  selecionarLocal,
+  desselecionarLocal
+} from '../../store/actions/index';
 
 class TelaCompartilhaLocal extends Component {
   state = {
@@ -59,4 +66,16 @@ class TelaCompartilhaLocal extends Component {
   }
 }
 
-export default TelaCompartilhaLocal;
+const mapStateToProps = state => ({
+  locais: state.locais.locais,
+  descricao: state.locais.descricao
+});
+
+const mapDispatchToProps = dispatch => ({
+  onIncluirLocal: descricao => dispatch(incluirLocal(descricao)),
+  onExcluirLocal: () => dispatch(excluirLocal()),
+  onSelecionarLocal: key => dispatch(selecionarLocal(key)),
+  onDesselecionarLocal: () => dispatch(desselecionarLocal())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TelaCompartilhaLocal);
