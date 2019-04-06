@@ -1,6 +1,8 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
+import { Ionicons } from '@expo/vector-icons';
 import {
-  StyleSheet, View, Image, Text, Button, Modal
+  StyleSheet, View, Image, Text, Button, Modal, TouchableOpacity
 } from 'react-native';
 
 class DetalheLocal extends Component {
@@ -21,9 +23,13 @@ class DetalheLocal extends Component {
       <Modal onRequestClose={this.props.onFecharModal} visible={this.props.localSelecionado !== null} animationType="slide">
         <View style={styles.modalContainer}>
           {conteudoModal}
-          <View>
-            <Button title="excluir" color="red" onPress={this.props.onExcluirLocal} />
-            <Button title="fechar" onPress={this.props.onFecharModal} />
+          <View style={styles.botoes}>
+            <View style={styles.botaoFechar}>
+              <Button title="fechar" onPress={this.props.onFecharModal} />
+            </View>
+            <TouchableOpacity onPress={this.props.onExcluirLocal}>
+              <Ionicons name="ios-trash" size={30} color="red" />
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>
@@ -43,6 +49,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     fontSize: 28
+  },
+  botoes: {
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
+  botaoFechar: {
+    width: '70%',
+    paddingRight: 30
   }
 });
 
