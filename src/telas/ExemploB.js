@@ -1,26 +1,45 @@
 import React, { Component } from 'react';
-import { View, Text, Button } from 'react-native';
 import { connect } from 'react-redux';
+import {
+  StyleSheet,
+  ScrollView,
+  View,
+  Button
+} from 'react-native';
+
 import { acaoExemplo } from '../store/actions/index';
+import EnfaseText from '../componentes/enfaseText';
+import FotoPicker from '../componentes/FotoPicker';
+import LocalPicker from '../componentes/LocalPicker';
+import LocalInput from '../componentes/LocalInput';
 
 class ExemploB extends Component {
-  testarReduxHandler = () => {
-    this.props.onAcaoExemplo('Escrita OK..');
-  }
-
   render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>ExemploB</Text>
-        <Text>{ this.props.qualquerNome }</Text>
-        <Button
-          title="Salvar"
-          onPress={this.testarReduxHandler}
-        />
-      </View>
+      <ScrollView>
+        <View style={styles.container}>
+          <EnfaseText>Compartilhar local:</EnfaseText>
+          <FotoPicker />
+          <LocalPicker />
+          <LocalInput />
+          <View style={styles.button}>
+            <Button title="Compartilhar" />
+          </View>
+        </View>
+      </ScrollView>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center'
+  },
+  button: {
+    margin: 8
+  }
+});
 
 // # exemploReducer é o reducer configurado no configureStore.
 // # Já o campo pertence a /reducers/exemplo
