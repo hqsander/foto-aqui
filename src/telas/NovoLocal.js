@@ -13,17 +13,21 @@ import FotoPicker from '../componentes/FotoPicker';
 import LocalPicker from '../componentes/LocalPicker';
 import LocalInput from '../componentes/LocalInput';
 
-class ExemploB extends Component {
+class NovoLocal extends Component {
+  static navigationOptions = {
+    tabBarLabel: 'Novo Local'
+  };
+
   render() {
     return (
       <ScrollView>
         <View style={styles.container}>
-          <EnfaseText>Compartilhar local:</EnfaseText>
+          <EnfaseText>Novo local:</EnfaseText>
           <FotoPicker />
           <LocalPicker />
           <LocalInput />
           <View style={styles.button}>
-            <Button title="Compartilhar" />
+            <Button title="Salvar" />
           </View>
         </View>
       </ScrollView>
@@ -51,4 +55,4 @@ const mapDispatchToProps = dispatch => ({
   onAcaoExemplo: conteudo => dispatch(acaoExemplo(conteudo))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExemploB);
+export default connect(mapStateToProps, mapDispatchToProps)(NovoLocal);

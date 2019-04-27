@@ -3,17 +3,17 @@ import { createAppContainer, createSwitchNavigator, createBottomTabNavigator } f
 import Icon from 'react-native-ionicons';
 
 import Login from './telas/Login';
-import ExemploA from './telas/ExemploA';
-import ExemploB from './telas/ExemploB';
+import LocaisSalvos from './telas/LocaisSalvos';
+import NovoLocal from './telas/NovoLocal';
 
 const getTabBarIcon = (navigation, focused, tintColor) => {
   const { routeName } = navigation.state;
   const IconComponent = Icon;
   let iconName;
-  if (routeName === 'ExemploA') {
-    iconName = 'md-map';
-  } else if (routeName === 'ExemploB') {
+  if (routeName === 'LocaisSalvos') {
     iconName = 'md-share';
+  } else if (routeName === 'NovoLocal') {
+    iconName = 'md-camera';
   }
 
   return <IconComponent name={iconName} size={25} color={tintColor} />;
@@ -23,8 +23,8 @@ const Navigator = createAppContainer(
   createSwitchNavigator({
     Login,
     App: createBottomTabNavigator({
-      ExemploA,
-      ExemploB
+      LocaisSalvos,
+      NovoLocal
     },
     {
       defaultNavigationOptions: ({ navigation }) => ({

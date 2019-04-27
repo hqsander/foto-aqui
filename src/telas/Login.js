@@ -8,7 +8,7 @@ class Login extends React.Component {
         <Text>Login</Text>
         <Button
           title="OK"
-          onPress={() => this.props.navigation.navigate('ExemploA')}
+          onPress={() => this.props.navigation.navigate('LocaisSalvos')}
         />
       </View>
     );

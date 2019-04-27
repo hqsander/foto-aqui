@@ -3,7 +3,11 @@ import { View, Text, Button } from 'react-native';
 import { connect } from 'react-redux';
 import { acaoExemplo } from '../store/actions/index';
 
-class ExemploA extends Component {
+class LocaisSalvos extends Component {
+  static navigationOptions = {
+    tabBarLabel: 'Locais Salvos'
+  };
+
   testarReduxHandler = () => {
     this.props.onAcaoExemplo('Escrita OK.');
   }
@@ -11,7 +15,7 @@ class ExemploA extends Component {
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>ExemploA</Text>
+        <Text>Locais Salvos.</Text>
         <Text>{ this.props.qualquerNome }</Text>
         <Button
           title="Salvar"
@@ -32,4 +36,4 @@ const mapDispatchToProps = dispatch => ({
   onAcaoExemplo: conteudo => dispatch(acaoExemplo(conteudo))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExemploA);
+export default connect(mapStateToProps, mapDispatchToProps)(LocaisSalvos);
