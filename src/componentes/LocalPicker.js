@@ -1,17 +1,32 @@
 import React, { Component } from 'react';
 import {
-  View, Button, StyleSheet, Text
+  View, Button, StyleSheet, Dimensions
 } from 'react-native';
+import MapView from 'react-native-maps';
 
 class LocalPicker extends Component {
+  state = {
+    focusedLocation: {
+      latitude: -19.881962,
+      longitude: -43.928011,
+      latitudeDelta: 0.0122,
+      longitudeDelta:
+        Dimensions.get('window').width
+        / Dimensions.get('window').height
+        * 0.0122
+    }
+  };
+
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.placeholder}>
-          <Text>Mapa</Text>
-        </View>
+        <MapView
+          initialRegion={this.state.focusedLocation}
+          style={styles.map}
+          onPress={this.pickLocationHandler}
+        />
         <View style={styles.button}>
-          <Button title="Local" onPress={() => alert('Selecione um local!')} />
+          <Button title="Minha Localização" />
         </View>
       </View>
     );
@@ -23,12 +38,9 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center'
   },
-  placeholder: {
-    borderWidth: 1,
-    borderColor: 'black',
-    backgroundColor: '#eee',
-    width: '80%',
-    height: 150
+  map: {
+    width: '100%',
+    height: 250
   },
   button: {
     margin: 8
