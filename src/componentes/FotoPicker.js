@@ -2,18 +2,36 @@ import React, { Component } from 'react';
 import {
   View, Image, Button, StyleSheet
 } from 'react-native';
-
-import imagemPlaceholder from '../../assets/placeholder.jpg';
+import ImagePicker from 'react-native-image-picker';
 
 class FotoPicker extends Component {
+  state = {
+    pickedImaged: null
+  }
+
+  pickImageHandler = () => {
+    ImagePicker.showImagePicker({ title: 'Pick an Image' }, (res) => {
+      if (res.didCancel) {
+        console.log('User cancelled!');
+      } else if (res.error) {
+        console.log('Error', res.error);
+      } else {
+        this.setState({
+          pickedImaged: { uri: res.uri }
+        });
+        this.props.onImagePicked({ uri: res.uri, base64: res.data });
+      }
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.placeholder}>
-          <Image source={imagemPlaceholder} style={styles.preview} />
+          <Image source={this.state.pickedImaged} style={styles.previewImage} />
         </View>
         <View style={styles.button}>
-          <Button title="Foto" onPress={() => alert('Selecione uma foto!')} />
+          <Button title="Foto" onPress={this.pickImageHandler} />
         </View>
       </View>
     );
@@ -35,7 +53,7 @@ const styles = StyleSheet.create({
   button: {
     margin: 8
   },
-  preview: {
+  previewImage: {
     width: '100%',
     height: '100%'
   }

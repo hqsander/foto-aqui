@@ -18,12 +18,15 @@ class NovoLocal extends Component {
     tabBarLabel: 'Novo Local'
   };
 
+  fotoEscolhidaHandler = () => {
+  }
+
   render() {
     return (
       <ScrollView>
         <View style={styles.container}>
           <EnfaseText>Novo local:</EnfaseText>
-          <FotoPicker />
+          <FotoPicker onImagePicked={this.fotoEscolhidaHandler} />
           <LocalPicker />
           <LocalInput />
           <View style={styles.button}>
