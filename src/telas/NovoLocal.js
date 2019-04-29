@@ -7,7 +7,8 @@ import {
   Button
 } from 'react-native';
 
-import { acaoExemplo } from '../store/actions/index';
+import { addLocal } from '../store/actions/local';
+import { acaoExemplo } from '../store/actions/entidadeX';
 import EnfaseText from '../componentes/enfaseText';
 import FotoPicker from '../componentes/FotoPicker';
 import LocalPicker from '../componentes/LocalPicker';
@@ -18,7 +19,49 @@ class NovoLocal extends Component {
     tabBarLabel: 'Novo Local'
   };
 
-  fotoEscolhidaHandler = () => {
+  state = {
+    ctr: {
+      local: {
+        val: ''
+      },
+      coordenadas: {
+        val: null
+      },
+      foto: {
+        val: null
+      }
+    }
+  };
+
+  descLocalChangedHandler = (val) => {
+    this.setState(prevState => ({
+      ctr: {
+        ...prevState.ctr,
+        local: {
+          ...prevState.ctr.local,
+          val
+        }
+      }
+    }));
+  };
+
+  addLocalHandler = () => {
+    this.props.onAddLocal(
+      this.state.ctr.local.val,
+      this.state.ctr.coordenadas.val,
+      this.state.ctr.foto.val
+    );
+  };
+
+  fotoEscolhidaHandler = (foto) => {
+    this.setState(prevState => ({
+      ctr: {
+        ...prevState.ctr,
+        foto: {
+          val: foto
+        }
+      }
+    }));
   }
 
   render() {
@@ -28,9 +71,15 @@ class NovoLocal extends Component {
           <EnfaseText>Novo local:</EnfaseText>
           <FotoPicker onImagePicked={this.fotoEscolhidaHandler} />
           <LocalPicker />
-          <LocalInput />
+          <LocalInput
+            local={this.state.ctr.local}
+            onChangeText={this.descLocalChangedHandler}
+          />
           <View style={styles.button}>
-            <Button title="Salvar" />
+            <Button
+              title="Salvar"
+              onPress={this.addLocalHandler}
+            />
           </View>
         </View>
       </ScrollView>
@@ -55,7 +104,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onAcaoExemplo: conteudo => dispatch(acaoExemplo(conteudo))
+  onAcaoExemplo: conteudo => dispatch(acaoExemplo(conteudo)),
+  onAddLocal: (local, coordenadas, foto) => dispatch(addLocal(local, coordenadas, foto))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NovoLocal);

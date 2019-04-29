@@ -3,9 +3,11 @@
 import { createStore, combineReducers, compose } from 'redux';
 
 import exemploReducer from './reducers/exemplo';
+import localReducer from './reducers/local';
 
 const rootReducer = combineReducers({
-  exemploReducer
+  exemploReducer,
+  localReducer
 });
 
 // # composeEnhancers com window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__

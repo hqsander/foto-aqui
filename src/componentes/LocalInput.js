@@ -3,9 +3,12 @@ import { TextInput, StyleSheet } from 'react-native';
 
 const localInput = props => (
   <TextInput
-    underlineColorAndroid="transparent"
     {...props}
+    underlineColorAndroid="transparent"
     style={styles.input}
+    placeholder="Nome do local..."
+    value={props.local.val}
+    onChangeText={props.onChangeText}
   />
 );
 
