@@ -33,24 +33,15 @@ class NovoLocal extends Component {
     }
   };
 
-  descLocalChangedHandler = (val) => {
+  descLocalChangedHandler = (desc) => {
     this.setState(prevState => ({
       ctr: {
         ...prevState.ctr,
         local: {
-          ...prevState.ctr.local,
-          val
+          val: desc
         }
       }
     }));
-  };
-
-  addLocalHandler = () => {
-    this.props.onAddLocal(
-      this.state.ctr.local.val,
-      this.state.ctr.coordenadas.val,
-      this.state.ctr.foto.val
-    );
   };
 
   fotoEscolhidaHandler = (foto) => {
@@ -64,13 +55,32 @@ class NovoLocal extends Component {
     }));
   }
 
+  coordenadaEscolhidaHandler = (coordenada) => {
+    this.setState(prevState => ({
+      ctr: {
+        ...prevState.ctr,
+        location: {
+          val: coordenada
+        }
+      }
+    }));
+  };
+
+  addLocalHandler = () => {
+    this.props.onAddLocal(
+      this.state.ctr.local.val,
+      this.state.ctr.coordenadas.val,
+      this.state.ctr.foto.val
+    );
+  };
+
   render() {
     return (
       <ScrollView>
         <View style={styles.container}>
           <EnfaseText>Novo local:</EnfaseText>
           <FotoPicker onImagePicked={this.fotoEscolhidaHandler} />
-          <LocalPicker />
+          <LocalPicker onLocationPick={this.coordenadaEscolhidaHandler} />
           <LocalInput
             local={this.state.ctr.local}
             onChangeText={this.descLocalChangedHandler}
