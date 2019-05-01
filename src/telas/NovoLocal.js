@@ -33,34 +33,34 @@ class NovoLocal extends Component {
     }
   };
 
-  descLocalChangedHandler = (desc) => {
+  descLocalChangedHandler = (val) => {
     this.setState(prevState => ({
       ctr: {
         ...prevState.ctr,
         local: {
-          val: desc
+          val
         }
       }
     }));
   };
 
-  fotoEscolhidaHandler = (foto) => {
+  fotoEscolhidaHandler = (val) => {
     this.setState(prevState => ({
       ctr: {
         ...prevState.ctr,
         foto: {
-          val: foto
+          val
         }
       }
     }));
   }
 
-  coordenadaEscolhidaHandler = (coordenada) => {
+  coordenadaEscolhidaHandler = (val) => {
     this.setState(prevState => ({
       ctr: {
         ...prevState.ctr,
-        location: {
-          val: coordenada
+        coordenadas: {
+          val
         }
       }
     }));
