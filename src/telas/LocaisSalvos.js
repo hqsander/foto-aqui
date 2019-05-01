@@ -1,39 +1,27 @@
 import React, { Component } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
-import { acaoExemplo } from '../store/actions/index';
+
+import ListaLocal from '../componentes/ListaLocal';
 
 class LocaisSalvos extends Component {
   static navigationOptions = {
     tabBarLabel: 'Locais Salvos'
   };
 
-  testarReduxHandler = () => {
-    this.props.onAcaoExemplo('Escrita OK.');
-  }
-
   render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Locais Salvos.</Text>
-        <Text>{ this.props.qualquerNome }</Text>
-        <Button
-          title="Salvar"
-          onPress={this.testarReduxHandler}
+      <View>
+        <ListaLocal
+          locais={this.props.locais}
         />
       </View>
     );
   }
 }
 
-// # exemploReducer é o reducer configurado no configureStore.
-// # Já o campo pertence a /reducers/exemplo
 const mapStateToProps = state => ({
-  qualquerNome: state.exemploReducer.campo
+  locais: state.localReducer.locais
 });
 
-const mapDispatchToProps = dispatch => ({
-  onAcaoExemplo: conteudo => dispatch(acaoExemplo(conteudo))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(LocaisSalvos);
+export default connect(mapStateToProps)(LocaisSalvos);
